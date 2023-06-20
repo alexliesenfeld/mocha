@@ -195,7 +195,7 @@ fn validate_mock_definition(req: &MockDefinition) -> Result<(), String> {
     Ok(())
 }
 
-// Remember the maximum number of matchers that successfully matched
+// Remember the maximum number of request-matchers that successfully matched
 fn get_distances(
     history: &Vec<&Arc<HttpMockRequest>>,
     matchers: &Vec<Box<dyn Matcher + Sync + Send>>,
@@ -232,7 +232,7 @@ fn get_request_distance(
         .sum()
 }
 
-// Remember the maximum number of matchers that successfully matched
+// Remember the maximum number of request-matchers that successfully matched
 fn get_min_distance_requests(request_distances: &BTreeMap<usize, usize>) -> Vec<usize> {
     // Find the element with the maximum matches
     let min_elem = request_distances

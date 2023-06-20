@@ -178,7 +178,7 @@
 //! This is in contrast to tests that use a local mock server.
 //!
 //! ## Limitations of the Standalone Mode
-//! At this time, it is not possible to use custom request matchers in combination with standalone
+//! At this time, it is not possible to use custom request request-matchers in combination with standalone
 //! mock servers (see [When::matches](struct.When.html#method.matches) or
 //! [Mock::expect_match](struct.Mock.html#method.expect_match)).
 //!
