@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Assertions
 `httpmock` provides detailed error messages to help users understand why their expected requests did not match the 
 actual requests received by the mock server. These error messages offer valuable insights for debugging and resolving 
@@ -10,7 +6,7 @@ issues in your tests. Let's take a closer look at the structure and content of t
 Let's look at the code example from the introduction, but this time let's modify it to demonstrate a scenario where 
 our HTTP client sends a request that doesn't match the specified mock.
 
-```rust
+```rust,noplayground
 use httpmock::prelude::*;
 
 // Start a lightweight mock server.
@@ -54,5 +50,8 @@ Actual:                     /does-not-exist
 Left:  /translate
 Right: /does-not-exist
 <Click to see difference>
+```
+```rust
+{{#include ../../../src/api/spec.rs:when-matches}}
 ```
 

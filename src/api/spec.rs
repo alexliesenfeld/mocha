@@ -753,6 +753,8 @@ impl When {
         });
         self
     }
+
+    ///// ANCHOR: when-matches
     /// Sets a custom matcher for expected HTTP request. If this function returns true, the request
     /// is considered a match and the mock server will respond to the request
     /// (given all other criteria are also met).
@@ -788,6 +790,8 @@ impl When {
         });
         self
     }
+    ///// ANCHOR_END: when-matches
+
     /// A semantic convenience for applying multiple operations
     /// on a given `When` instance via an discrete encapsulating
     /// function.
