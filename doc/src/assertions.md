@@ -1,4 +1,4 @@
-# Assertions
+# Using Assertions
 `httpmock` provides detailed error messages to help users understand why their expected requests did not match the 
 actual requests received by the mock server. These error messages offer valuable insights for debugging and resolving 
 issues in your tests. Let's take a closer look at the structure and content of the error messages.
@@ -35,7 +35,7 @@ assert_eq!(response.status(), 200);
 Because our request has URL path `/does-not-exist` rather than `/translate?word=hello`, the `hello_mock.assert()` method
 raises an error during test execution with the following information:
 
-```sh
+```
 0 of 1 expected requests matched the mock specification.
 Here is a comparison with the most similar non-matching request (request number 1):
 
@@ -50,8 +50,5 @@ Actual:                     /does-not-exist
 Left:  /translate
 Right: /does-not-exist
 <Click to see difference>
-```
-```rust
-{{#include ../../../src/api/spec.rs:when-matches}}
 ```
 

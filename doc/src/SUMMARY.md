@@ -4,28 +4,20 @@
 
 # Basics
 
-- [Getting Started](basics/getting_started.md)
-- [Assertions](basics/assertions.md)
-- [Mock Lifecycle](basics/mock_lifecycle.md)
+- [Getting Started](getting_started.md)
 
-# Defining Mocks
+# Using Mocks
 
-- [Matching Requests](basics/getting_started.md)
-    - [Built-in Matchers](basics/getting_started.md)
-    - [Custom Matchers](basics/getting_started.md)
-- [Defining Responses](basics/getting_started.md)
-    - [Built-in Responders](basics/getting_started.md)
-    - [Simulating Latency](basics/getting_started.md)
-
+- [Matching Requests](matching_requests.md)
+- [Defining Responses](defining_responses.md)
+- [Using Assertions](assertions.md)
+- [Deleting Mocks](deleting_mocks.md)
 
 # Advanced Topics
-
-- [Parallelism and Resource Usage](basics/getting_started.md)
-- [Composition and Reusability](basics/getting_started.md)
-- [How Request Matching Works](basics/getting_started.md)
-- [Starting Multiple Servers](basics/getting_started.md)
-
-
+- [Server and Mock Lifecycle](mock_lifecycle.md)
+- [Composition and Reusability](getting_started.md)
+- [How Request Matching Works](getting_started.md)
+- [Starting Multiple Servers](getting_started.md)
 
 # Standalone
 

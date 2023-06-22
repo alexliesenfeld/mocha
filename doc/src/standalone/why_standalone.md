@@ -65,8 +65,8 @@ fn standalone_test() {
     * The then closure defines the response behavior, including the desired HTTP status code, response body, or headers.
 4. Send HTTP requests to the standalone server
 5. Assert and validate:
-    * After sending the HTTP request, you can perform assertions to [verify that the expected behavior](../basics/getting_started.md) was triggered.
-    * Use the [assert methods](../basics/getting_started.md) to validate the response status code, headers, or body.
+    * After sending the HTTP request, you can perform assertions to [verify that the expected behavior](../getting_started.md) was triggered.
+    * Use the [assert methods](../getting_started.md) to validate the response status code, headers, or body.
     * You can also use the assert methods on the mock instance to ensure that the mock expectations were met.
 
 Note: In the provided code, there are additional examples of using the standalone mode, 

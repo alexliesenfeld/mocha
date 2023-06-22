@@ -3,4 +3,4 @@ authors = ["Alexander Liesenfeld"]
 language = "en"
 multilingual = false
 src = "src"
-title = "httpmock Tutorial"
+title = "httpmock User Guide"
