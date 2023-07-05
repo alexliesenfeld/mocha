@@ -27,7 +27,7 @@ There are several compelling reasons why you would want to utilize an HTTP mocki
 
 ## Design Goals
 
-### Simple and Boring API
+### Simple API
 The primary design objective of this library is to minimize the cognitive load associated with creating mocks. 
 The intention is to make the process intuitive and straightforward, requiring minimal knowledge and effort. 
 This is achieved by leveraging the methods provided by the `When` and `Then` variables, as exemplified in the 
