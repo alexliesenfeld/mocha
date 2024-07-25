@@ -126,7 +126,23 @@ pub(crate) fn find_mock(
         let mock = mocks.get_mut(&found_id).unwrap();
         mock.call_counter += 1;
 
-        return Ok(Some(mock.definition.response.clone()));
+        let response = mock.definition.response.clone();
+
+        if let Some(ct) = mock.definition.request.delete_after_n {
+            if mock.call_counter >= ct {
+                log::debug!(
+                    "Deleting mock with id={} after receiving {} calls",
+                    found_id,
+                    mock.call_counter
+                );
+                if mock.is_static {
+                    return Err(format!("Cannot delete static mock with ID {}", found_id));
+                }
+                mocks.remove(&found_id);
+            }
+        }
+
+        return Ok(Some(response));
     }
 
     log::debug!(
@@ -260,10 +276,11 @@ mod test {
     use regex::Regex;
 
     use crate::common::data::{
-        HttpMockRequest, MockDefinition, MockServerHttpResponse, Pattern, RequestRequirements,
+        ActiveMock, HttpMockRequest, MockDefinition, MockServerHttpResponse, Pattern,
+        RequestRequirements,
     };
     use crate::server::web::handlers::{
-        add_new_mock, read_one_mock, request_matches, validate_mock_definition, verify,
+        add_new_mock, find_mock, read_one_mock, request_matches, validate_mock_definition, verify,
     };
     use crate::server::MockServerState;
     use crate::Method;
@@ -673,6 +690,40 @@ mod test {
         // Assert
         assert_eq!(result1, false);
         assert_eq!(result2, true);
+    }
+
+    /// This test checks if matching "delete_after_n" is working as expected.
+    #[test]
+    fn delete_after_n_test() {
+        // Arrange
+        let state = MockServerState::default();
+
+        let req = RequestRequirements::new()
+            .with_path("/test-path".to_string())
+            .with_delete_after_n(1);
+
+        let res = MockServerHttpResponse {
+            body: None,
+            delay: None,
+            status: Some(200),
+            headers: None,
+        };
+
+        let mock_def = MockDefinition::new(req.clone(), res);
+
+        add_new_mock(&state, mock_def, false).unwrap();
+
+        let mock = HttpMockRequest::new("GET".to_string(), "/test-path".to_string());
+
+        // Act
+        let does_match = request_matches(&MockServerState::default(), Arc::new(mock.clone()), &req);
+        let first_run = find_mock(&state, mock.clone()).unwrap();
+        let second_run = find_mock(&state, mock.clone()).unwrap();
+
+        // Assert
+        assert_eq!(true, does_match);
+        assert_eq!(true, first_run.is_some());
+        assert_eq!(true, second_run.is_none());
     }
 
     /// This test checks if matching "path_matches" is working as expected.

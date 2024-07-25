@@ -42,6 +42,7 @@ struct YAMLRequestRequirements {
     pub query_param: Option<Vec<NameValuePair>>,
     pub x_www_form_urlencoded_key_exists: Option<Vec<String>>,
     pub x_www_form_urlencoded_tuple: Option<Vec<NameValuePair>>,
+    pub delete_after_n: Option<usize>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -131,6 +132,7 @@ fn map_to_mock_definition(yaml_definition: YAMLMockDefinition) -> MockDefinition
             query_param: to_pair_vec(yaml_definition.when.query_param),
             x_www_form_urlencoded: to_pair_vec(yaml_definition.when.x_www_form_urlencoded_tuple),
             x_www_form_urlencoded_key_exists: yaml_definition.when.x_www_form_urlencoded_key_exists,
+            delete_after_n: yaml_definition.when.delete_after_n,
             matchers: None,
         },
         response: MockServerHttpResponse {

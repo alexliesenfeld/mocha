@@ -190,6 +190,7 @@ pub struct RequestRequirements {
     pub query_param: Option<Vec<(String, String)>>,
     pub x_www_form_urlencoded_key_exists: Option<Vec<String>>,
     pub x_www_form_urlencoded: Option<Vec<(String, String)>>,
+    pub delete_after_n: Option<usize>,
 
     #[serde(skip_serializing, skip_deserializing)]
     pub matchers: Option<Vec<MockMatcherFunction>>,
@@ -221,6 +222,7 @@ impl RequestRequirements {
             query_param: None,
             x_www_form_urlencoded: None,
             x_www_form_urlencoded_key_exists: None,
+            delete_after_n: None,
             matchers: None,
         }
     }
@@ -297,6 +299,11 @@ impl RequestRequirements {
 
     pub fn with_query_param(mut self, arg: Vec<(String, String)>) -> Self {
         self.query_param = Some(arg);
+        self
+    }
+
+    pub fn with_delete_after_n(mut self, arg: usize) -> Self {
+        self.delete_after_n = Some(arg);
         self
     }
 }

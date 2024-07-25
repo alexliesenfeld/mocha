@@ -327,6 +327,40 @@ impl When {
         self
     }
 
+    /// Sets the number of requests the mock should respond to before self-destructing.
+    ///
+    /// * `count` - The number of requests to respond to.
+    ///
+    /// Note: the mock will no longer be available to assert against when the request
+    /// limit is hit.
+    ///
+    /// ```
+    /// use httpmock::prelude::*;
+    /// use isahc::{prelude::*, Request};
+    ///
+    /// let server = MockServer::start();
+    ///
+    /// let mock = server.mock(|when, then|{
+    ///     when.path("/test").delete_after_n(1);
+    ///     then.status(202);
+    /// });
+    ///
+    /// // Send a first request which deletes the mock from the server, then send another request.
+    /// let response1 = isahc::get(server.url("/test")).unwrap();
+    ///
+    /// let response2 = isahc::get(server.url("/test")).unwrap();
+    ///
+    /// // Assert
+    /// assert_eq!(response1.status(), 202);
+    /// assert_eq!(response2.status(), 404);
+    /// ```
+    pub fn delete_after_n(mut self, count: usize) -> Self {
+        update_cell(&self.expectations, |e| {
+            e.delete_after_n = Some(count);
+        });
+        self
+    }
+
     /// Sets the required HTTP request body content.
     ///
     /// * `body` - The required HTTP request body.
